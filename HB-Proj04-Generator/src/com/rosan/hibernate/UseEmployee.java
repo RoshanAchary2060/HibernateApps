@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class UseEmployee2 {
+public class UseEmployee {
 
 	public static void main(String[] args) {
 		Configuration cfg = new Configuration();
@@ -15,7 +15,7 @@ public class UseEmployee2 {
 		cfg.configure("hibernate.cfg.xml");
 		System.out.println("configure() called");
 		SessionFactory factory = cfg.buildSessionFactory();
-		System.out.println("SessionFactory craeted");
+		System.out.println("SessionFactory created");
 		Session sess = factory.openSession();
 		System.out.println("Session created");
 		Scanner kb = new Scanner(System.in);
@@ -23,22 +23,17 @@ public class UseEmployee2 {
 		Transaction tx = null;
 		try {
 			tx = sess.beginTransaction();
-			System.out.println("Enter empid:");
-			int empNo = kb.nextInt();
-			System.out.println("Enter empname");
-			String name = kb.next();
-			System.out.println("Enter empsal");
-			double sal = kb.nextDouble();
-			Employee e = new Employee();
-			e.setEmpNo(empNo);
-			e.setEmpName(name);
-			e.setEmpSal(sal);
-			System.out.println("Saving object in session");
-			sess.save(e);
-			System.out.println("Calling flush");
-			sess.flush();
-			System.out.println("Waiting");
-			System.in.read();
+			for (int i = 1; i <= 9; i++) {
+				System.out.println("Enter empname");
+				String name = kb.next();
+				System.out.println("Enter empsal");
+				double sal = kb.nextDouble();
+				Employee e = new Employee();
+				e.setEmpName(name);
+				e.setEmpSal(sal);
+				System.out.println("Saving object in session");
+				sess.save(e);
+			}
 		} catch (Exception ex) {
 			System.out.println("Exception occured");
 			ex.printStackTrace();
@@ -54,6 +49,7 @@ public class UseEmployee2 {
 				}
 				sess.close();
 				factory.close();
+				kb.close();
 				System.out.println("Bye");
 			}
 		}

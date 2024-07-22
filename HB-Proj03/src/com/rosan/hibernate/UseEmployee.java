@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class UseEmployee2 {
+public class UseEmployee {
 
 	public static void main(String[] args) {
 		Configuration cfg = new Configuration();
@@ -15,7 +15,7 @@ public class UseEmployee2 {
 		cfg.configure("hibernate.cfg.xml");
 		System.out.println("configure() called");
 		SessionFactory factory = cfg.buildSessionFactory();
-		System.out.println("SessionFactory craeted");
+		System.out.println("SessionFactory created");
 		Session sess = factory.openSession();
 		System.out.println("Session created");
 		Scanner kb = new Scanner(System.in);
@@ -29,10 +29,13 @@ public class UseEmployee2 {
 			String name = kb.next();
 			System.out.println("Enter empsal");
 			double sal = kb.nextDouble();
+			System.out.println("Enter deptno");
+			int dno = kb.nextInt();
 			Employee e = new Employee();
 			e.setEmpNo(empNo);
 			e.setEmpName(name);
 			e.setEmpSal(sal);
+			e.setDeptno(dno);
 			System.out.println("Saving object in session");
 			sess.save(e);
 			System.out.println("Calling flush");
