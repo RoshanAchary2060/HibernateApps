@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.rosan.hibernate.Employee" table="Employee">
+		<id name="empNo" column="emp_no">
+			<!-- <generator class="increment" /> -->
+			<!-- <generator class="sequence"> -->
+			<!-- <param name="sequence_name">myseq</param> -->
+			<!-- </generator> -->
+			<!-- <generator class="seqhilo" > -->
+			<!-- <param name="sequence">empseq</param> -->
+			<!-- <param name="max_lo">3</param> -->
+			<!-- </generator> -->
+
+			<!-- <generator class="native" /> -->
+
+		</id>
+
+		<property name="empName" column="emp_name" />
+		<property name="empSal" column="emp_sal" />
+
+	</class>
+	<query name="findAllEmp">From Employee</query>
+	<query name="empBySal">
+	<![CDATA[from Employee e where e.empSal > :x]]>
+	</query>
+
+	<sql-query name="findallEmp">
+		select * from employee
+		<return alias="Employee" class="com.rosan.hibernate.Employee" />
+	</sql-query>
+	<sql-query name="empbySal">
+		<![CDATA[select * from employee where emp_sal > :x ]]>
+		<return alias="Employee" class="com.rosan.hibernate.Employee" />
+	</sql-query>
+	
+	<sql-query name="empSal">
+		<![CDATA[select emp_name,emp_sal from employee where emp_sal > :x ]]>
+	</sql-query>
+
+</hibernate-mapping>
