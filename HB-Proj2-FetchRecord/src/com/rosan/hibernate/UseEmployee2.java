@@ -35,6 +35,7 @@ public class UseEmployee2 {
 			e.setEmpSal(sal);
 			System.out.println("Saving object in session");
 			sess.save(e);
+//			sess.save(e); // calling two times doesnot affect
 			System.out.println("Calling flush");
 			sess.flush();
 			System.out.println("Waiting");

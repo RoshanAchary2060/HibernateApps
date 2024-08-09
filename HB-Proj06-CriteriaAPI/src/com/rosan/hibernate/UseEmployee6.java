@@ -2,13 +2,17 @@ package com.rosan.hibernate;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
-public class UseEmployee {
+public class UseEmployee6 {
 
 	public static void main(String[] args) {
 		Configuration cfg = new Configuration();
@@ -18,26 +22,17 @@ public class UseEmployee {
 		SessionFactory factory = cfg.buildSessionFactory();
 		System.out.println("SessionFactory created");
 		Session sess = factory.openSession();
-		try {
-//			Query qry = sess.createQuery("select e from Employee e");
-//			Query qry = sess.createQuery("from Employee e");
-			Query qry = sess.createQuery("From Employee");
-			List<Employee> empList = qry.list();
-			Iterator<Employee> it = empList.iterator();
-			while (it.hasNext()) {
-				Employee e = it.next();
-				System.out.println(e);
-			}
-		} catch (Exception ex) {
-			System.out.println("Problem occured!");
-			ex.printStackTrace();
-		} finally {
-			if (sess != null) {
-				sess.close();
-			}
-			if (factory != null) {
-				factory.close();
-			}
+		Criteria crit = sess.createCriteria(Employee.class);
+//		Criterion crn = Restrictions.isNull("empSal");
+		Criterion crn = Restrictions.isNotNull("empSal");
+		crit.add(crn);
+		List<Employee> list = crit.list();
+		Iterator<Employee> it = list.iterator();
+		while (it.hasNext()) {
+			Employee e = it.next();
+			System.out.println(e);
 		}
+		sess.close();
+		factory.close();
 	}
 }

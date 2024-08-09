@@ -34,6 +34,7 @@ public class UseEmployee5 {
 			e.setEmpSal(sal);
 			System.out.println("updating object in session");
 			sess.update(e);
+			System.out.println("Commit() fired");
 			tx.commit();
 		} catch (Exception ex) {
 			System.out.println("Exception occured");
