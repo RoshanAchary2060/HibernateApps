@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.rosan.hibernate.Student" table="Student">
+		<id name="studentId" column="sid">
+
+		</id>
+
+		<property name="studentName" column="sname" />
+		<property name="marks" column="marks" />
+		<set name="courses" cascade="all" table="student_course">
+			<key column="sid" />
+
+
+			<many-to-many column="cid"
+				class="com.rosan.hibernate.Course">
+			</many-to-many>
+		</set>
+
+	</class>
+
+
+</hibernate-mapping>

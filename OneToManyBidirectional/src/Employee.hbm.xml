@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.rosan.hibernate.Employee" table="Emp">
+		<id name="empNo" column="emp_no">
+
+		</id>
+
+		<property name="empName" column="emp_name" />
+		<property name="empSal" column="emp_sal" />
+
+		<many-to-one name="dept" column="dno"
+			class="com.rosan.hibernate.Department" cascade="save-update"
+			lazy="false">
+
+		</many-to-one>
+
+	</class>
+
+
+</hibernate-mapping>
