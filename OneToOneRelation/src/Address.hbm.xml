@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.rosan.hibernate.Address" table="Address">
+		<id name="addressId" column="id">
+			<generator class="foreign">
+				<param name="property">p</param>
+			</generator>
+		</id>
+
+		<property name="city" column="city" />
+
+		<property name="street" column="street" />
+
+		<one-to-one name="p" class="com.rosan.hibernate.Person"
+			cascade="all" constrained="true" />
+	</class>
+
+
+</hibernate-mapping>

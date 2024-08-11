@@ -11,7 +11,7 @@
 
 		<property name="studentName" column="sname" />
 		<property name="marks" column="marks" />
-		<set name="courses" cascade="all" table="student_course">
+		<set name="courses" cascade="save-update" table="student_course">
 			<key column="sid" />
 
 

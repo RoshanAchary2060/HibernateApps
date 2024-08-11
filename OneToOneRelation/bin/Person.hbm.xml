@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.rosan.hibernate.Person" table="Person">
+		<id name="personId" column="id">
+
+		</id>
+
+		<property name="personName" column="name" />
+		<property name="personAge" column="age" />
+
+	</class>
+
+
+</hibernate-mapping>
