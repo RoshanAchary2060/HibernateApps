@@ -1,13 +1,14 @@
 package com.rosan.hibernate;
 
-import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class UseEmployee02 {
+public class UseEmployee {
 
 	public static void main(String[] args) {
 		Configuration cfg = new Configuration();
@@ -15,22 +16,35 @@ public class UseEmployee02 {
 		cfg.configure("hibernate.cfg.xml");
 		System.out.println("configure() called");
 		SessionFactory sf = cfg.buildSessionFactory();
-		System.out.println("SessionFactory created");
 		Session sess = sf.openSession();
-		Scanner kb = new Scanner(System.in);
-		System.out.println("Enter name");
-		String name = kb.next();
-		System.out.println("Enter sal");
-		double sal = kb.nextDouble();
-		Employee e = new Employee();
-		e.setEmpName(name);
-		e.setEmpSal(sal);
+
+		Department d = new Department();
+		d.setDeptno(101);
+		d.setDname("Information Tech");
+
+		Employee e1 = new Employee();
+		e1.setEmpNo(501);
+		e1.setEmpName("Ram");
+		e1.setEmpSal(50000);
+		e1.setDepno(d);
+
+		Employee e2 = new Employee();
+		e2.setEmpNo(502);
+		e2.setEmpName("Shyam");
+		e2.setEmpSal(40000);
+		e2.setDepno(d);
+		
+		Set<Employee> st = new HashSet<Employee>();
+		st.add(e1);
+		st.add(e2);
+		d.setStaff(st);
+		
 		Transaction tx = sess.beginTransaction();
-		sess.save(e);
+		sess.save(d);
 		tx.commit();
-		System.out.println("Rec saved");
+		System.out.println("Recs saved");
+
 		sess.close();
 		sf.close();
-		kb.close();
 	}
 }
